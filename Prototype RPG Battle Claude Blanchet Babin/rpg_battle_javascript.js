@@ -99,13 +99,19 @@ var mortHeros4 = false
 var cible = 0
 
 //définir les dégâts du monstre lors de la riposte
-
 var degat1 = 0
 var degat2 = 0
 var degat2 = 0
 
+//définir les dégâts de Beckett en cas d'attaque spéciale
 var degatBeckett = 0
 var multiplicateur = 0
+
+//définir les cooldown des héros
+cool1 = [0,0,0];
+cool2 = [0,0,0];
+cool3 = [0,0,0];
+cool4 = [0,0,0];
 
 //début du combat
 
@@ -117,7 +123,6 @@ bulle1.style.visibility='hidden';
 bulle2.style.visibility='hidden';
 bulle3.style.visibility='hidden';
 
-console.log(cible);
 
 
 image1.onclick = function() {
@@ -127,6 +132,24 @@ image1.onclick = function() {
     
         CompetenceHeros.style.visibility='visible';
         contenuBoiteDialogue.innerHTML = "Vous avez sélectionné Castle. Que voulez-vous faire ?";
+        boutonAttaque.style.backgroundColor = 'rgb(231, 137, 137)';
+        boutonDefense.style.backgroundColor = 'rgb(78, 143, 78)';
+        boutonSpecial.style.backgroundColor = 'rgb(120, 120, 202)';
+
+        if (cool1[0]>0){
+
+            boutonAttaque.style.backgroundColor = 'grey';
+        }
+
+        if(cool1[1]>0){
+
+            boutonDefense.style.backgroundColor = 'grey';
+        }
+
+        if(cool1[2]>0){
+
+            boutonSpecial.style.backgroundColor = 'grey';
+        }
 
 
 
@@ -143,9 +166,11 @@ image1.onclick = function() {
                     contenuBoiteDialogue.innerHTML = "La guêpe subit 50 points de dégâts.";
                 }
 
-                attaque1=true
+                attaque1=true;
 
-                action1 = true
+                action1 = true;
+
+                cool1[0]=2;
 
                 if (vieMonstre1.innerHTML <= 0) {
                     contenuBoiteDialogue.innerHTML = "La guêpe a été tuée.";
@@ -162,9 +187,11 @@ image1.onclick = function() {
                 contenuBoiteDialogue.innerHTML = "Le robot subit 50 points de dégâts.";
                 }
 
-                attaque1= true
+                attaque1= true;
 
-                action1 = true
+                action1 = true;
+
+                cool1[0]=2;
 
                 if (vieMonstre2.innerHTML <= 0) {
                     contenuBoiteDialogue.innerHTML = "Le robot a été tué.";
@@ -182,9 +209,11 @@ image1.onclick = function() {
 
                 }
 
-                attaque1 = true
+                attaque1 = true;
 
-                action1 = true
+                action1 = true;
+
+                cool1[0]=2;
 
                 if (vieMonstre3.innerHTML <= 0) {
                     contenuBoiteDialogue.innerHTML = "L'arbre 3 a été tué.";
@@ -200,8 +229,9 @@ image1.onclick = function() {
         boutonDefense.onclick = function(){
 
             contenuBoiteDialogue.innerHTML = "Vous avez choisi de vous défendre, Castle va se protéger lors de la prochaine riposte.";
-            def1 = 2
-            action1 = true
+            def1 = 2;
+            action1 = true;
+            cool1[1] = 2;
             CompetenceHeros.style.visibility='hidden';
         }
 
@@ -210,13 +240,14 @@ image1.onclick = function() {
             if(manaHero1.innerHTML >= 10){
 
                 contenuBoiteDialogue.innerHTML = "Castle utilse sa capacité spéciale. La défense de tout le monde est augmentée.";
-                def1 = 10
-                def2 = 10
-                def3 = 10
-                def4 = 10
-                action1 = true
+                def1 = 10;
+                def2 = 10;
+                def3 = 10;
+                def4 = 10;
+                action1 = true;
                 manaHero1.innerHTML = parseInt(manaHero1.innerHTML) - 10;
                 CompetenceHeros.style.visibility='hidden';
+                cool1[2]=2;
             }
 
             else
@@ -226,7 +257,7 @@ image1.onclick = function() {
             
 
         }
-
+        
     
     }
   
@@ -238,6 +269,24 @@ image2.onclick = function() {
 
         CompetenceHeros.style.visibility='visible';
         contenuBoiteDialogue.innerHTML = "Vous avez sélectionné Esposito. Que voulez-vous faire ?";
+        boutonAttaque.style.backgroundColor = 'rgb(231, 137, 137)';
+        boutonDefense.style.backgroundColor = 'rgb(78, 143, 78)';
+        boutonSpecial.style.backgroundColor = 'rgb(120, 120, 202)';
+
+        if (cool2[0]>0){
+
+            boutonAttaque.style.backgroundColor = 'grey';
+        }
+
+        if(cool2[1]>0){
+
+            boutonDefense.style.backgroundColor = 'grey';
+        }
+
+        if(cool2[2]>0){
+
+            boutonSpecial.style.backgroundColor = 'grey';
+        }
 
         boutonAttaque.onclick = function() {
 
@@ -251,9 +300,11 @@ image2.onclick = function() {
                     contenuBoiteDialogue.innerHTML = "La guêpe subit 50 points de dégâts.";
                 }
 
-                attaque2 = true
+                attaque2 = true;
 
-                action2 = true
+                action2 = true;
+
+                cool2[0]=2;
 
                 if (vieMonstre1.innerHTML <= 0) {
                     contenuBoiteDialogue.innerHTML = "La guêpe a été tuée.";
@@ -270,9 +321,11 @@ image2.onclick = function() {
                     contenuBoiteDialogue.innerHTML = "Le robot subit 50 points de dégâts.";
                 }
 
-                attaque2 = true
+                attaque2 = true;
 
-                action2 = true
+                action2 = true;
+
+                cool2[0]=2;
 
                 if (vieMonstre2.innerHTML <= 0) {
                     contenuBoiteDialogue.innerHTML = "Le robot a été tué.";
@@ -289,9 +342,11 @@ image2.onclick = function() {
                     contenuBoiteDialogue.innerHTML = "L'arbre subit 50 points de dégâts.";
                 }
 
-                attaque2 = true
+                attaque2 = true;
 
-                action2 = true
+                action2 = true;
+
+                cool2[0]=2;
 
                 if (vieMonstre3.innerHTML <= 0) {
                     contenuBoiteDialogue.innerHTML = "L'arbre a été tué.";
@@ -306,9 +361,10 @@ image2.onclick = function() {
         boutonDefense.onclick = function(){
 
             contenuBoiteDialogue.innerHTML = "Vous avez choisi de vous défendre, Esposito va se protéger lors de la prochaine riposte";
-            def2 = 2
-            action2 = true
+            def2 = 2;
+            action2 = true;
             CompetenceHeros.style.visibility='hidden';
+            cool2[1]=2;
         }
 
         boutonSpecial.onclick = function(){
@@ -328,9 +384,11 @@ image2.onclick = function() {
                         contenuBoiteDialogue.innerHTML = "La guêpe subit 100 points de dégâts. Les autres subissent 75 points de dégats";
                     }
     
-                    attaque2 = true
+                    attaque2 = true;
     
-                    action2 = true
+                    action2 = true;
+
+                    cool2[2]=2;
     
                     if (vieMonstre1.innerHTML <= 0) {
                         contenuBoiteDialogue.innerHTML = "La guêpe a été tuée.";
@@ -360,9 +418,11 @@ image2.onclick = function() {
                         contenuBoiteDialogue.innerHTML = "Le robot subit 100 points de dégâts. Les autres subissent 75 points de dégats";
                     }
     
-                    attaque2 = true
+                    attaque2 = true;
     
-                    action2 = true
+                    action2 = true;
+
+                    cool2[2]=2;
     
                     if (vieMonstre1.innerHTML <= 0) {
                         contenuBoiteDialogue.innerHTML = "La guêpe a été tuée.";
@@ -392,9 +452,11 @@ image2.onclick = function() {
                         contenuBoiteDialogue.innerHTML = "L'arbre subit 100 points de dégâts. Les autres subissent 75 points de dégats";
                     }
     
-                    attaque2 = true
+                    attaque2 = true;
     
-                    action2 = true
+                    action2 = true;
+
+                    cool2[2]=2;
     
                     if (vieMonstre1.innerHTML <= 0) {
                         contenuBoiteDialogue.innerHTML = "La guêpe a été tuée.";
@@ -435,6 +497,24 @@ image3.onclick = function() {
 
         CompetenceHeros.style.visibility='visible';
         contenuBoiteDialogue.innerHTML = "Vous avez sélectionné Beckett. Que voulez-vous faire ?";
+        boutonAttaque.style.backgroundColor = 'rgb(231, 137, 137)';
+        boutonDefense.style.backgroundColor = 'rgb(78, 143, 78)';
+        boutonSpecial.style.backgroundColor = 'rgb(120, 120, 202)';
+
+        if (cool3[0]>0){
+
+            boutonAttaque.style.backgroundColor = 'grey';
+        }
+
+        if(cool3[1]>0){
+
+            boutonDefense.style.backgroundColor = 'grey';
+        }
+
+        if(cool3[2]>0){
+
+            boutonSpecial.style.backgroundColor = 'grey';
+        }
 
         boutonAttaque.onclick = function() {
 
@@ -447,9 +527,11 @@ image3.onclick = function() {
                     vieMonstre1.innerHTML = parseInt(vieMonstre1.innerHTML) - 50;
                     contenuBoiteDialogue.innerHTML = "La guêpe subit 50 points de dégâts.";
                 }
-                attaque3 = true
+                attaque3 = true;
 
-                action3 = true
+                action3 = true;
+
+                cool3[0]=2;
 
                 if (vieMonstre1.innerHTML <= 0) {
                     contenuBoiteDialogue.innerHTML = "La guêpe a été tuée.";
@@ -465,9 +547,11 @@ image3.onclick = function() {
                     vieMonstre2.innerHTML = parseInt(vieMonstre2.innerHTML) - 50;
                     contenuBoiteDialogue.innerHTML = "Le robot subit 50 points de dégâts.";
                 }
-                attaque3 = true
+                attaque3 = true;
 
-                action3 = true
+                action3 = true;
+
+                cool3[0]=2;
 
                 if (vieMonstre2.innerHTML <= 0) {
                     contenuBoiteDialogue.innerHTML = "Le robot a été tué.";
@@ -484,9 +568,11 @@ image3.onclick = function() {
                 contenuBoiteDialogue.innerHTML = "L'arbre subit 50 points de dégâts.";
                 }
 
-                attaque3 = true
+                attaque3 = true;
 
-                action3 = true
+                action3 = true;
+
+                cool3[0]=2;
 
                 if (vieMonstre3.innerHTML <= 0) {
                     contenuBoiteDialogue.innerHTML = "L'arbre a été tué.";
@@ -501,8 +587,9 @@ image3.onclick = function() {
         boutonDefense.onclick = function(){
 
             contenuBoiteDialogue.innerHTML = "Vous avez choisi de vous défendre, Beckett va se protéger lors de la prochaine riposte";
-            def3 = 2
-            action3 = true
+            def3 = 2;
+            action3 = true;
+            cool3[1]= 2;
             CompetenceHeros.style.visibility='hidden';
         }
 
@@ -521,9 +608,11 @@ image3.onclick = function() {
                         vieMonstre1.innerHTML = parseInt(vieMonstre1.innerHTML) - degatBeckett;
                         contenuBoiteDialogue.innerHTML = "La guêpe subit " + degatBeckett + " points de dégâts.";
                     }
-                    attaque3 = true
+                    attaque3 = true;
     
-                    action3 = true
+                    action3 = true;
+
+                    cool3[2]= 2;
     
                     if (vieMonstre1.innerHTML <= 0) {
                         contenuBoiteDialogue.innerHTML = "La guêpe a été tuée.";
@@ -539,9 +628,11 @@ image3.onclick = function() {
                         vieMonstre2.innerHTML = parseInt(vieMonstre2.innerHTML) - degatBeckett;
                         contenuBoiteDialogue.innerHTML = "Le robot subit " + degatBeckett + " points de dégâts.";
                     }
-                    attaque3 = true
+                    attaque3 = true;
     
-                    action3 = true
+                    action3 = true;
+
+                    cool3[2]= 2;
     
                     if (vieMonstre2.innerHTML <= 0) {
                         contenuBoiteDialogue.innerHTML = "Le robot a été tué.";
@@ -558,9 +649,11 @@ image3.onclick = function() {
                     contenuBoiteDialogue.innerHTML = "L'arbre subit " + degatBeckett + " points de dégâts.";
                     }
     
-                    attaque3 = true
+                    attaque3 = true;
     
-                    action3 = true
+                    action3 = true;
+
+                    cool3[2]= 2;
     
                     if (vieMonstre3.innerHTML <= 0) {
                         contenuBoiteDialogue.innerHTML = "L'arbre a été tué.";
@@ -590,6 +683,24 @@ image4.onclick = function() {
 
         CompetenceHeros.style.visibility='visible';
         contenuBoiteDialogue.innerHTML = "Vous avez sélectionné Ryan. Que voulez-vous faire ?";
+        boutonAttaque.style.backgroundColor = 'rgb(231, 137, 137)';
+        boutonDefense.style.backgroundColor = 'rgb(78, 143, 78)';
+        boutonSpecial.style.backgroundColor = 'rgb(120, 120, 202)';
+
+        if (cool4[0]>0){
+
+            boutonAttaque.style.backgroundColor = 'grey';
+        }
+
+        if(cool4[1]>0){
+
+            boutonDefense.style.backgroundColor = 'grey';
+        }
+
+        if(cool4[2]>0){
+
+            boutonSpecial.style.backgroundColor = 'grey';
+        }
 
         boutonAttaque.onclick = function() {
 
@@ -603,9 +714,11 @@ image4.onclick = function() {
                     contenuBoiteDialogue.innerHTML = "La guêpe subit 50 points de dégâts.";
                 }
 
-                attaque4 = true
+                attaque4 = true;
 
-                action4 = true
+                action4 = true;
+
+                cool4[0]=2;
 
                 if (vieMonstre1.innerHTML <= 0) {
                     contenuBoiteDialogue.innerHTML = "La guêpe a été tuée.";
@@ -622,9 +735,11 @@ image4.onclick = function() {
                     contenuBoiteDialogue.innerHTML = "Le robot subit 50 points de dégâts.";
                 }
 
-                attaque4 = true
+                attaque4 = true;
 
-                action4 = true
+                action4 = true;
+
+                cool4[0]=2;
 
                 if (vieMonstre2.innerHTML <= 0) {
                     contenuBoiteDialogue.innerHTML = "Le robot a été tué.";
@@ -641,9 +756,11 @@ image4.onclick = function() {
                     contenuBoiteDialogue.innerHTML = "L'arbre subit 50 points de dégâts.";
                 }
 
-                attaque4= true
+                attaque4= true;
 
-                action4 = true
+                action4 = true;
+
+                cool4[0]=2;
 
                 if (vieMonstre3.innerHTML <= 0) {
                     contenuBoiteDialogue.innerHTML = "L'arbre a été tué.";
@@ -659,8 +776,9 @@ image4.onclick = function() {
         boutonDefense.onclick = function(){
 
             contenuBoiteDialogue.innerHTML = "Vous avez choisi de vous défendre, Ryan va se protéger lors de la prochaine riposte";
-            def4 = 2
-            action4 = true
+            def4 = 2;
+            action4 = true;
+            cool4[1]=2;
             CompetenceHeros.style.visibility='hidden';
 
         }
@@ -676,7 +794,8 @@ image4.onclick = function() {
                 vieHero3.innerHTML = parseInt(vieHero3.innerHTML) +10;
                 vieHero4.innerHTML = parseInt(vieHero4.innerHTML) +10;
 
-                action4 = true
+                action4 = true;
+                cool4[2]=2;
                 manaHero4.innerHTML = parseInt(manaHero4.innerHTML) - 10;
                 CompetenceHeros.style.visibility='hidden';
             }
