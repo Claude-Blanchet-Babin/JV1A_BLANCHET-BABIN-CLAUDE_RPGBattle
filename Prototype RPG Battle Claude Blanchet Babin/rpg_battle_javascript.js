@@ -130,21 +130,29 @@ bulle3.style.visibility='hidden';
 //sélection du héros "Castle"
 image1.onclick = function() {
 
+    //retirer le cadre des autres héros si on vient de changer de héros avant de finir l'action
     statHero2.style.border = 'none';
     statHero3.style.border = 'none';
     statHero4.style.border = 'none';
 
+    //mettre en avant le fait que ce héros est sélectionné
     statHero1.style.border = "solid blue";
 
+    //vérifier que l'action du tour n'a pas déjà été faite
     if (action1 == false){
 
-    
+        //montrer les capacités du héros
         CompetenceHeros.style.visibility='visible';
+
+        //informer le joueur de la situation
         contenuBoiteDialogue.innerHTML = "Vous avez sélectionné Castle. Que voulez-vous faire ?";
+
+        //réinitialiser la couleur des boutons en cas de sélection de ce héros après un autre
         boutonAttaque.style.backgroundColor = 'rgb(231, 137, 137)';
         boutonDefense.style.backgroundColor = 'rgb(78, 143, 78)';
         boutonSpecial.style.backgroundColor = 'rgb(120, 120, 202)';
 
+        //vérification des cooldown pour informer visuellemnt le joueur que cette action n'est pas disponible
         if (cool1[0]>0){
 
             boutonAttaque.style.backgroundColor = 'grey';
@@ -161,37 +169,47 @@ image1.onclick = function() {
         }
 
 
-
+        //déclenchement de la phase d'attaque
         boutonAttaque.onclick = function() {
 
+            //vérifier la disponibilité du cooldown
             if(cool1[0]==0){
 
-
+                //informer le joueur de son choix
                 contenuBoiteDialogue.innerHTML = "Vous avez choisi d'attaquer. Qui voulez-vous attaquer ?";
 
-                
+                //séquence d'attaque sur le monstre 1
                 imgMonstre1.onclick = function() {
 
+                    //vérifier que l'attaque n'a pas déjà été faite
                     if(attaque1==false){
 
                         vieMonstre1.innerHTML = parseInt(vieMonstre1.innerHTML) - 50;
                         contenuBoiteDialogue.innerHTML = "La guêpe subit 50 points de dégâts.";
                     }
 
+                    //empecher une autre attaque
                     attaque1=true;
 
+                    //empecher une autre action
                     action1 = true;
 
+                    //lancement du cooldown pour deux tours
                     cool1[0]=2;
 
+                    //disparition de la sélection du héros
                     statHero1.style.border = 'none';
 
+                    //vérifier si le monstre a été tué par cette attaque
+                    //si oui, informer le joueur, faire disparaitre le monstre et enregistrer sa mort
                     if (vieMonstre1.innerHTML <= 0) {
                         contenuBoiteDialogue.innerHTML = "La guêpe a été tuée.";
                         imgMonstre1.style.visibility='hidden';
                         mortMonstre1 = true;
                     }
 
+                    //vérification de l'éligibilité à la victoire (possible si dernier monstre en vie)
+                    // si victoire, laisser un petit temps avant d'informer le joueur et enregistrer la victoire
                     if((mortMonstre1==true) && (mortMonstre2==true) && (mortMonstre3==true)){
                         setTimeout(() => {
                             scene.style.visibility = 'hidden';
@@ -202,6 +220,7 @@ image1.onclick = function() {
 
                 }
                 
+                //séquence d'attaque sur le monstre 2 (idem)
                 imgMonstre2.onclick = function() {
 
                     if (attaque1==false){
@@ -233,6 +252,7 @@ image1.onclick = function() {
                     }
                 }
 
+                //séquence d'attaque sur le monstre 2 (idem)
                 imgMonstre3.onclick = function() {
 
                     if(attaque1==false){
@@ -265,10 +285,13 @@ image1.onclick = function() {
                     }
 
                 }
-            
+                
+                //redissimuler les compétences du héros
                 CompetenceHeros.style.visibility='hidden';
 
             }
+            // si le cooldown n'est pas disponible et que le jouer essaye quand même
+            // prévenir que ce n'est pas possible et qu'il faut donc choisir autre chose
 
             else
                 if(cool1[0]>0){
@@ -276,29 +299,40 @@ image1.onclick = function() {
                 }
         }
 
+        //déclenchement de la phase de défense
         boutonDefense.onclick = function(){
 
+            //vérification du cooldown
             if (cool1[1]==0){
 
+                //informer le joueur de la situation
                 contenuBoiteDialogue.innerHTML = "Vous avez choisi de vous défendre, Castle va se protéger lors de la prochaine riposte.";
+                // changement de la stat de défense pour la phase de riposte des monstres
                 def1 = 2;
+                // empecher une autre action
                 action1 = true;
+                //lancement du cooldown pour cette capacité
                 cool1[1] = 2;
+                //redissimuler les capacités
                 CompetenceHeros.style.visibility='hidden';
+                //retirer la sélection
                 statHero1.style.border = 'none';
             }
 
+            // si le cooldown n'est pas disponible, prévenir le joueur
             else
                 if(cool1[1]>0){
                     contenuBoiteDialogue.innerHTML = "Castle doit attendre le prochain tour pour se défendre.";
                 }
         }
 
+        //déclenchement de l'attaque spéciale (Castle:protection globale pour l'équipe)
         boutonSpecial.onclick = function(){
 
+            //verifier le cooldown
             if(cool1[2]==0){
 
-
+                //verifier le mana disponible
                 if(manaHero1.innerHTML >= 10){
 
                     contenuBoiteDialogue.innerHTML = "Castle utilse sa capacité spéciale. La défense de tout le monde est augmentée.";
@@ -313,6 +347,7 @@ image1.onclick = function() {
                     statHero1.style.border = 'none';
                 }
 
+                // s'il n'y a pas assez de mana, prévenir le joueur
                 else
                     if(manaHero1.innerHTML<10){
                         contenuBoiteDialogue.innerHTML = "Castle n'a pas assez de mana pour utiliser sa capacité spéciale.";  
@@ -320,6 +355,7 @@ image1.onclick = function() {
 
             }
 
+            //si le cooldown n'est pas disponible, prévenir le joueur
             else
                 if(cool1[2]>0){
                     contenuBoiteDialogue.innerHTML = "Castle doit attendre le prochain tour pour utiliser sa capacité spéciale.";
@@ -335,6 +371,8 @@ image1.onclick = function() {
 }
 
 //sélection du héros "Esposito"
+//idem
+//attaque spéciale : attaque de zone sur tous les monstres
 image2.onclick = function() {
 
     statHero1.style.border = 'none';
@@ -509,8 +547,14 @@ image2.onclick = function() {
                         if(attaque2==false){
         
                             vieMonstre1.innerHTML = parseInt(vieMonstre1.innerHTML) - 100;
-                            vieMonstre2.innerHTML = parseInt(vieMonstre2.innerHTML) - 75;
-                            vieMonstre3.innerHTML = parseInt(vieMonstre3.innerHTML) - 75;
+
+                            if(mortMonstre2 == false){
+                                vieMonstre2.innerHTML = parseInt(vieMonstre2.innerHTML) - 75;
+                            }
+                            
+                            if(mortMonstre3 == false){
+                                vieMonstre3.innerHTML = parseInt(vieMonstre3.innerHTML) - 75;
+                            }
 
                             contenuBoiteDialogue.innerHTML = "La guêpe subit 100 points de dégâts. Les autres subissent 75 points de dégats";
                         }
@@ -551,10 +595,15 @@ image2.onclick = function() {
                     imgMonstre2.onclick = function() {
 
                         if(attaque2==false){
-        
-                            vieMonstre1.innerHTML = parseInt(vieMonstre1.innerHTML) - 75;
+                            if (mortMonstre1 == false) {
+                                vieMonstre1.innerHTML = parseInt(vieMonstre1.innerHTML) - 75;
+                            }
+
                             vieMonstre2.innerHTML = parseInt(vieMonstre2.innerHTML) - 100;
-                            vieMonstre3.innerHTML = parseInt(vieMonstre3.innerHTML) - 75;
+
+                            if(mortMonstre3 == false) {
+                                vieMonstre3.innerHTML = parseInt(vieMonstre3.innerHTML) - 75;
+                            }
 
                             contenuBoiteDialogue.innerHTML = "Le robot subit 100 points de dégâts. Les autres subissent 75 points de dégats";
                         }
@@ -595,9 +644,15 @@ image2.onclick = function() {
                     imgMonstre3.onclick = function() {
 
                         if(attaque2==false){
-        
-                            vieMonstre1.innerHTML = parseInt(vieMonstre1.innerHTML) - 75;
-                            vieMonstre2.innerHTML = parseInt(vieMonstre2.innerHTML) - 75;
+                            
+                            if(mortMonstre1 == false){
+                                vieMonstre1.innerHTML = parseInt(vieMonstre1.innerHTML) - 75;
+                            }
+
+                            if(mortMonstre2 == false){
+                                vieMonstre2.innerHTML = parseInt(vieMonstre2.innerHTML) - 75;
+                            }
+
                             vieMonstre3.innerHTML = parseInt(vieMonstre3.innerHTML) - 100;
 
                             contenuBoiteDialogue.innerHTML = "L'arbre subit 100 points de dégâts. Les autres subissent 75 points de dégats";
@@ -659,6 +714,8 @@ image2.onclick = function() {
 }
 
 //sélection de l'héroïne "Beckett"
+//idem
+//attaque spéciale : attaque puissante sur un monstre unique avec un multiplicateur de dégâts
 image3.onclick = function() {
 
     statHero1.style.border = 'none';
@@ -939,6 +996,8 @@ image3.onclick = function() {
 }
 
 //sélection du héros "Ryan"
+//idem
+//capacité spéciale : soin de zone pour l'équipe
 image4.onclick = function() {
 
     statHero1.style.border = 'none';
@@ -1150,20 +1209,27 @@ image4.onclick = function() {
 
 //début de la riposte
 scene.onclick = function(){
+    //vérifier que tous les héros ont fait une action, ou bien que la partie est terminé
+    //prévenir le joueur que la phase de riposte va commencer
+    //la riposte des monstres est séparé dans le temps
     if ((action1== true) && (action2 == true) && (action3 == true) && (action4 == true) && (victoire==false) && (defaite==false)) {
         setTimeout(() => {
             contenuBoiteDialogue.innerHTML = "Les monstres vont attaquer !";
             setTimeout(() => {
 
+                //vérifier que le monstre n'est pas mort pour qu'il fasse une riposte
+                //définir aléatoirement la cible
                 if (mortMonstre1 == false){
                     cible = Math.floor(Math.random() * 4)+1;
 
+                    //définir les degats en fonction de la defense de la cible
                     if ((cible == 1) && (mortHeros1==false)){
                         degat1 = 10 / def1
                         vieHero1.innerHTML = parseInt(vieHero1.innerHTML) - degat1;
                         contenuBoiteDialogue.innerHTML = "La guêpe attaque Castle et lui inflige " + degat1 + " points de dégâts";
 
-
+                        //verifier si cette attaque a tué le héros
+                        //si oui, disparition du héros et enregistrement de la mort
                         if (vieHero1.innerHTML <= 0) {
                             contenuBoiteDialogue.innerHTML = "Castle a été tué.";
                             statHero1.style.visibility='hidden';
@@ -1172,6 +1238,7 @@ scene.onclick = function(){
                             attaque1=true;
                         }
                     }
+                    //idem si autre cible
                     if ((cible == 2) && (mortHeros2 == false)){
                         degat1 = 10 / def2
                         vieHero2.innerHTML = parseInt(vieHero2.innerHTML) - degat1;
@@ -1220,6 +1287,7 @@ scene.onclick = function(){
 
             setTimeout(() => {
 
+                //séparation temporel de l'attaque d'un autre monstre
                 if (mortMonstre2 == false){
                     cible = Math.floor(Math.random() * 4)+1;
 
@@ -1345,7 +1413,8 @@ scene.onclick = function(){
                     }
                 }
                 // réinitialistion des statistiques
-
+                // vérifier si le héros est mort pendant la riposte
+                // si oui, inutile de réinitialiser ses informations
                 if(mortHeros1==false){
                     action1 = false;
                     attaque1 = false;
@@ -1422,7 +1491,7 @@ scene.onclick = function(){
                 cool4[2]=cool4[2]-1
             }
 
-
+            //prevenir le joueur que la riposte est fini et qu'il peut reprendre la partie
             setTimeout(() => {
 
 
@@ -1433,6 +1502,8 @@ scene.onclick = function(){
                 def3 = 1
                 def4 = 1
 
+                //verifier si tous les heros sont morts
+                // si oui, lancer ecran de defaite
                 if((mortHeros1==true) && (mortHeros2==true) && (mortHeros3==true) && (mortHeros4==true)){
 
                     scene.style.visibility = 'hidden';
