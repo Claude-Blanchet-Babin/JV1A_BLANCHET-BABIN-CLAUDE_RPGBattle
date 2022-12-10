@@ -124,7 +124,7 @@ bulle2.style.visibility='hidden';
 bulle3.style.visibility='hidden';
 
 
-
+//sélection du héros "Castle"
 image1.onclick = function() {
 
     if (action1 == false){
@@ -155,105 +155,133 @@ image1.onclick = function() {
 
         boutonAttaque.onclick = function() {
 
-            contenuBoiteDialogue.innerHTML = "Vous avez choisi d'attaquer. Qui voulez-vous attaquer ?";
+            if(cool1[0]==0){
 
+
+                contenuBoiteDialogue.innerHTML = "Vous avez choisi d'attaquer. Qui voulez-vous attaquer ?";
+
+                
+                imgMonstre1.onclick = function() {
+
+                    if(attaque1==false){
+
+                        vieMonstre1.innerHTML = parseInt(vieMonstre1.innerHTML) - 50;
+                        contenuBoiteDialogue.innerHTML = "La guêpe subit 50 points de dégâts.";
+                    }
+
+                    attaque1=true;
+
+                    action1 = true;
+
+                    cool1[0]=2;
+
+                    if (vieMonstre1.innerHTML <= 0) {
+                        contenuBoiteDialogue.innerHTML = "La guêpe a été tuée.";
+                        imgMonstre1.style.visibility='hidden';
+                        mortMonstre1 = true;
+                    }
+                }
+                
+                imgMonstre2.onclick = function() {
+
+                    if (attaque1==false){
+
+                    vieMonstre2.innerHTML = parseInt(vieMonstre2.innerHTML) - 50;
+                    contenuBoiteDialogue.innerHTML = "Le robot subit 50 points de dégâts.";
+                    }
+
+                    attaque1= true;
+
+                    action1 = true;
+
+                    cool1[0]=2;
+
+                    if (vieMonstre2.innerHTML <= 0) {
+                        contenuBoiteDialogue.innerHTML = "Le robot a été tué.";
+                        imgMonstre2.style.visibility='hidden';
+                        mortMonstre2 = true;
+                    }
+                }
+
+                imgMonstre3.onclick = function() {
+
+                    if(attaque1==false){
+
+                    vieMonstre3.innerHTML = parseInt(vieMonstre3.innerHTML) - 50;
+                    contenuBoiteDialogue.innerHTML = "L'arbre subit 50 points de dégâts.";
+
+                    }
+
+                    attaque1 = true;
+
+                    action1 = true;
+
+                    cool1[0]=2;
+
+                    if (vieMonstre3.innerHTML <= 0) {
+                        contenuBoiteDialogue.innerHTML = "L'arbre 3 a été tué.";
+                        imgMonstre3.style.visibility='hidden';
+                        mortMonstre3 = true;
+                    }
+                }
             
-            imgMonstre1.onclick = function() {
+                CompetenceHeros.style.visibility='hidden';
 
-                if(attaque1==false){
-
-                    vieMonstre1.innerHTML = parseInt(vieMonstre1.innerHTML) - 50;
-                    contenuBoiteDialogue.innerHTML = "La guêpe subit 50 points de dégâts.";
-                }
-
-                attaque1=true;
-
-                action1 = true;
-
-                cool1[0]=2;
-
-                if (vieMonstre1.innerHTML <= 0) {
-                    contenuBoiteDialogue.innerHTML = "La guêpe a été tuée.";
-                    imgMonstre1.style.visibility='hidden';
-                    mortMonstre1 = true;
-                }
-            }
-            
-            imgMonstre2.onclick = function() {
-
-                if (attaque1==false){
-
-                vieMonstre2.innerHTML = parseInt(vieMonstre2.innerHTML) - 50;
-                contenuBoiteDialogue.innerHTML = "Le robot subit 50 points de dégâts.";
-                }
-
-                attaque1= true;
-
-                action1 = true;
-
-                cool1[0]=2;
-
-                if (vieMonstre2.innerHTML <= 0) {
-                    contenuBoiteDialogue.innerHTML = "Le robot a été tué.";
-                    imgMonstre2.style.visibility='hidden';
-                    mortMonstre2 = true;
-                }
             }
 
-            imgMonstre3.onclick = function() {
-
-                if(attaque1==false){
-
-                vieMonstre3.innerHTML = parseInt(vieMonstre3.innerHTML) - 50;
-                contenuBoiteDialogue.innerHTML = "L'arbre subit 50 points de dégâts.";
-
+            else
+                if(cool1[0]>0){
+                    contenuBoiteDialogue.innerHTML = "Castle doit attendre le prochain tour pour attaquer.";
                 }
-
-                attaque1 = true;
-
-                action1 = true;
-
-                cool1[0]=2;
-
-                if (vieMonstre3.innerHTML <= 0) {
-                    contenuBoiteDialogue.innerHTML = "L'arbre 3 a été tué.";
-                    imgMonstre3.style.visibility='hidden';
-                    mortMonstre3 = true;
-                }
-            }
-        
-            CompetenceHeros.style.visibility='hidden';
-
         }
 
         boutonDefense.onclick = function(){
 
-            contenuBoiteDialogue.innerHTML = "Vous avez choisi de vous défendre, Castle va se protéger lors de la prochaine riposte.";
-            def1 = 2;
-            action1 = true;
-            cool1[1] = 2;
-            CompetenceHeros.style.visibility='hidden';
+            if (cool1[1]==0){
+
+                contenuBoiteDialogue.innerHTML = "Vous avez choisi de vous défendre, Castle va se protéger lors de la prochaine riposte.";
+                def1 = 2;
+                action1 = true;
+                cool1[1] = 2;
+                CompetenceHeros.style.visibility='hidden';
+            }
+
+            else
+                if(cool1[1]>0){
+                    contenuBoiteDialogue.innerHTML = "Castle doit attendre le prochain tour pour se défendre.";
+                }
         }
 
         boutonSpecial.onclick = function(){
 
-            if(manaHero1.innerHTML >= 10){
+            if(cool1[2]==0){
 
-                contenuBoiteDialogue.innerHTML = "Castle utilse sa capacité spéciale. La défense de tout le monde est augmentée.";
-                def1 = 10;
-                def2 = 10;
-                def3 = 10;
-                def4 = 10;
-                action1 = true;
-                manaHero1.innerHTML = parseInt(manaHero1.innerHTML) - 10;
-                CompetenceHeros.style.visibility='hidden';
-                cool1[2]=2;
+
+                if(manaHero1.innerHTML >= 10){
+
+                    contenuBoiteDialogue.innerHTML = "Castle utilse sa capacité spéciale. La défense de tout le monde est augmentée.";
+                    def1 = 10;
+                    def2 = 10;
+                    def3 = 10;
+                    def4 = 10;
+                    action1 = true;
+                    manaHero1.innerHTML = parseInt(manaHero1.innerHTML) - 10;
+                    CompetenceHeros.style.visibility='hidden';
+                    cool1[2]=2;
+                }
+
+                else
+                    if(manaHero1.innerHTML<10){
+                        contenuBoiteDialogue.innerHTML = "Castle n'a pas assez de mana pour utiliser sa capacité spéciale.";  
+                    }
+
             }
 
             else
-                if(manaHero1.innerHTML<10){
-                    contenuBoiteDialogue.innerHTML = "Castle n'a pas assez de mana pour utiliser sa capacité spéciale";  
+                if(cool1[2]>0){
+                    contenuBoiteDialogue.innerHTML = "Castle doit attendre le prochain tour pour faire sa capacité spéciale.";
                 }
+
             
 
         }
@@ -263,6 +291,7 @@ image1.onclick = function() {
   
 }
 
+//sélection du héros "Esposito"
 image2.onclick = function() {
 
     if(action2 == false){
@@ -490,6 +519,7 @@ image2.onclick = function() {
     }
 }
 
+//sélection de l'héroïne "Beckett"
 image3.onclick = function() {
 
     if(action3==false){
@@ -676,7 +706,7 @@ image3.onclick = function() {
     }
 }
 
-
+//sélection du héros "Ryan"
 image4.onclick = function() {
 
     if (action4==false){
@@ -986,7 +1016,7 @@ scene.onclick = function(){
                 }
 
             },7000);
-
+            // réinitialistion des statistiques
             action1 = false
             action2 = false
             action3 = false
@@ -996,6 +1026,60 @@ scene.onclick = function(){
             attaque2 = false
             attaque3 = false
             attaque4 = false
+
+
+            // cooldown Héros 1
+            if(cool1[0]>0){
+                cool1[0]=cool1[0]-1
+            }
+
+            if(cool1[1]>0){
+                cool1[1]=cool1[1]-1
+            }
+
+            if(cool1[2]>0){
+                cool1[2]=cool1[2]-1
+            }
+
+            // cooldown Héros 2
+            if(cool2[0]>0){
+                cool2[0]=cool2[0]-1
+            }
+
+            if(cool2[1]>0){
+                cool2[1]=cool2[1]-1
+            }
+
+            if(cool2[2]>0){
+                cool2[2]=cool2[2]-1
+            }
+
+            // cooldown Héros 3
+            if(cool3[0]>0){
+                cool3[0]=cool3[0]-1
+            }
+
+            if(cool3[1]>0){
+                cool3[1]=cool3[1]-1
+            }
+
+            if(cool3[2]>0){
+                cool3[2]=cool3[2]-1
+            }
+
+            // cooldown Héros 4
+            if(cool4[0]>0){
+                cool4[0]=cool4[0]-1
+            }
+
+            if(cool4[1]>0){
+                cool4[1]=cool4[1]-1
+            }
+
+            if(cool4[2]>0){
+                cool4[2]=cool4[2]-1
+            }
+
 
             setTimeout(() => {
             
