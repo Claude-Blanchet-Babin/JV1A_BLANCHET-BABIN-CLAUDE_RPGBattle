@@ -1,7 +1,5 @@
 //déclaration des infos des héros
 
-// listeHéro = [0 nom héro, 1 vie Héro, 2 dégat Héro, 3 mana Héro, 4 spécial]
-
 //déclaration des variables vie héros
 
 vieHero1 = document.getElementById("vieHero1");
@@ -113,6 +111,11 @@ cool2 = [0,0,0];
 cool3 = [0,0,0];
 cool4 = [0,0,0];
 
+
+//définir s'il y a une victoire ou une défaite
+var victoire = false
+var defaite = false
+
 //début du combat
 
 //cacher les éléments que l'on souhaite
@@ -126,6 +129,12 @@ bulle3.style.visibility='hidden';
 
 //sélection du héros "Castle"
 image1.onclick = function() {
+
+    statHero2.style.border = 'none';
+    statHero3.style.border = 'none';
+    statHero4.style.border = 'none';
+
+    statHero1.style.border = "solid blue";
 
     if (action1 == false){
 
@@ -175,11 +184,22 @@ image1.onclick = function() {
 
                     cool1[0]=2;
 
+                    statHero1.style.border = 'none';
+
                     if (vieMonstre1.innerHTML <= 0) {
                         contenuBoiteDialogue.innerHTML = "La guêpe a été tuée.";
                         imgMonstre1.style.visibility='hidden';
                         mortMonstre1 = true;
                     }
+
+                    if((mortMonstre1==true) && (mortMonstre2==true) && (mortMonstre3==true)){
+                        setTimeout(() => {
+                            scene.style.visibility = 'hidden';
+                            contenuBoiteDialogue.innerHTML = "YOU WIN";
+                            victoire = true;
+                        },1000);
+                    }
+
                 }
                 
                 imgMonstre2.onclick = function() {
@@ -196,10 +216,20 @@ image1.onclick = function() {
 
                     cool1[0]=2;
 
+                    statHero1.style.border = 'none';
+
                     if (vieMonstre2.innerHTML <= 0) {
                         contenuBoiteDialogue.innerHTML = "Le robot a été tué.";
                         imgMonstre2.style.visibility='hidden';
                         mortMonstre2 = true;
+                    }
+
+                    if((mortMonstre1==true) && (mortMonstre2==true) && (mortMonstre3==true)){
+                        setTimeout(() => {
+                            scene.style.visibility = 'hidden';
+                            contenuBoiteDialogue.innerHTML = "YOU WIN";
+                            victoire = true;
+                        },1000);
                     }
                 }
 
@@ -218,11 +248,22 @@ image1.onclick = function() {
 
                     cool1[0]=2;
 
+                    statHero1.style.border = 'none';
+
                     if (vieMonstre3.innerHTML <= 0) {
                         contenuBoiteDialogue.innerHTML = "L'arbre 3 a été tué.";
                         imgMonstre3.style.visibility='hidden';
                         mortMonstre3 = true;
                     }
+
+                    if((mortMonstre1==true) && (mortMonstre2==true) && (mortMonstre3==true)){
+                        setTimeout(() => {
+                            scene.style.visibility = 'hidden';
+                            contenuBoiteDialogue.innerHTML = "YOU WIN";
+                            victoire = true;
+                        },1000);
+                    }
+
                 }
             
                 CompetenceHeros.style.visibility='hidden';
@@ -244,6 +285,7 @@ image1.onclick = function() {
                 action1 = true;
                 cool1[1] = 2;
                 CompetenceHeros.style.visibility='hidden';
+                statHero1.style.border = 'none';
             }
 
             else
@@ -268,6 +310,7 @@ image1.onclick = function() {
                     manaHero1.innerHTML = parseInt(manaHero1.innerHTML) - 10;
                     CompetenceHeros.style.visibility='hidden';
                     cool1[2]=2;
+                    statHero1.style.border = 'none';
                 }
 
                 else
@@ -279,7 +322,7 @@ image1.onclick = function() {
 
             else
                 if(cool1[2]>0){
-                    contenuBoiteDialogue.innerHTML = "Castle doit attendre le prochain tour pour faire sa capacité spéciale.";
+                    contenuBoiteDialogue.innerHTML = "Castle doit attendre le prochain tour pour utiliser sa capacité spéciale.";
                 }
 
             
@@ -293,6 +336,12 @@ image1.onclick = function() {
 
 //sélection du héros "Esposito"
 image2.onclick = function() {
+
+    statHero1.style.border = 'none';
+    statHero3.style.border = 'none';
+    statHero4.style.border = 'none';
+
+    statHero2.style.border = 'solid blue';
 
     if(action2 == false){
 
@@ -319,208 +368,304 @@ image2.onclick = function() {
 
         boutonAttaque.onclick = function() {
 
-            contenuBoiteDialogue.innerHTML = "Vous avez choisi d'attaquer. Qui voulez-vous attaquer ?";
-            
-            imgMonstre1.onclick = function() {
+            if(cool2[0]==0){
 
-                if(attaque2==false){
 
-                    vieMonstre1.innerHTML = parseInt(vieMonstre1.innerHTML) - 50;
-                    contenuBoiteDialogue.innerHTML = "La guêpe subit 50 points de dégâts.";
-                }
-
-                attaque2 = true;
-
-                action2 = true;
-
-                cool2[0]=2;
-
-                if (vieMonstre1.innerHTML <= 0) {
-                    contenuBoiteDialogue.innerHTML = "La guêpe a été tuée.";
-                    imgMonstre1.style.visibility='hidden';
-                    mortMonstre1 = true;
-                }
-            }
-            
-            imgMonstre2.onclick = function() {
-
-                if(attaque2==false){
-
-                    vieMonstre2.innerHTML = parseInt(vieMonstre2.innerHTML) - 50;
-                    contenuBoiteDialogue.innerHTML = "Le robot subit 50 points de dégâts.";
-                }
-
-                attaque2 = true;
-
-                action2 = true;
-
-                cool2[0]=2;
-
-                if (vieMonstre2.innerHTML <= 0) {
-                    contenuBoiteDialogue.innerHTML = "Le robot a été tué.";
-                    imgMonstre2.style.visibility='hidden';
-                    mortMonstre2 = true;
-                }
-            }
-
-            imgMonstre3.onclick = function() {
-
-                if(attaque2==false){
-
-                    vieMonstre3.innerHTML = parseInt(vieMonstre3.innerHTML) - 50;
-                    contenuBoiteDialogue.innerHTML = "L'arbre subit 50 points de dégâts.";
-                }
-
-                attaque2 = true;
-
-                action2 = true;
-
-                cool2[0]=2;
-
-                if (vieMonstre3.innerHTML <= 0) {
-                    contenuBoiteDialogue.innerHTML = "L'arbre a été tué.";
-                    imgMonstre3.style.visibility='hidden';
-                    mortMonstre3 = true;
-                }
-            }
-
-            CompetenceHeros.style.visibility='hidden';
-        }
-
-        boutonDefense.onclick = function(){
-
-            contenuBoiteDialogue.innerHTML = "Vous avez choisi de vous défendre, Esposito va se protéger lors de la prochaine riposte";
-            def2 = 2;
-            action2 = true;
-            CompetenceHeros.style.visibility='hidden';
-            cool2[1]=2;
-        }
-
-        boutonSpecial.onclick = function(){
-
-            if(manaHero2.innerHTML >= 10){
-
-                contenuBoiteDialogue.innerHTML = "Esposito utilse sa capacité spéciale. Quel monstre doit prendre l'attaque principale ?";
-
+                contenuBoiteDialogue.innerHTML = "Vous avez choisi d'attaquer. Qui voulez-vous attaquer ?";
+                
                 imgMonstre1.onclick = function() {
 
                     if(attaque2==false){
-    
-                        vieMonstre1.innerHTML = parseInt(vieMonstre1.innerHTML) - 100;
-                        vieMonstre2.innerHTML = parseInt(vieMonstre2.innerHTML) - 75;
-                        vieMonstre3.innerHTML = parseInt(vieMonstre3.innerHTML) - 75;
 
-                        contenuBoiteDialogue.innerHTML = "La guêpe subit 100 points de dégâts. Les autres subissent 75 points de dégats";
+                        vieMonstre1.innerHTML = parseInt(vieMonstre1.innerHTML) - 50;
+                        contenuBoiteDialogue.innerHTML = "La guêpe subit 50 points de dégâts.";
                     }
-    
+
                     attaque2 = true;
-    
+
                     action2 = true;
 
-                    cool2[2]=2;
-    
+                    cool2[0]=2;
+
+                    statHero2.style.border = 'none';
+
                     if (vieMonstre1.innerHTML <= 0) {
                         contenuBoiteDialogue.innerHTML = "La guêpe a été tuée.";
                         imgMonstre1.style.visibility='hidden';
                         mortMonstre1 = true;
                     }
-                    if (vieMonstre2.innerHTML <= 0) {
-                        contenuBoiteDialogue.innerHTML = "Le robot a été tué.";
-                        imgMonstre2.style.visibility='hidden';
-                        mortMonstre2 = true;
-                    }
-                    if (vieMonstre3.innerHTML <= 0) {
-                        contenuBoiteDialogue.innerHTML = "L'arbre a été tué.";
-                        imgMonstre3.style.visibility='hidden';
-                        mortMonstre3 = true;
-                    }
-                }
 
+                    if((mortMonstre1==true) && (mortMonstre2==true) && (mortMonstre3==true)){
+                        setTimeout(() => {
+                            scene.style.visibility = 'hidden';
+                            contenuBoiteDialogue.innerHTML = "YOU WIN";
+                            victoire = true;
+                        },1000);
+                    }
+                    
+                }
+                
                 imgMonstre2.onclick = function() {
 
                     if(attaque2==false){
-    
-                        vieMonstre1.innerHTML = parseInt(vieMonstre1.innerHTML) - 75;
-                        vieMonstre2.innerHTML = parseInt(vieMonstre2.innerHTML) - 100;
-                        vieMonstre3.innerHTML = parseInt(vieMonstre3.innerHTML) - 75;
 
-                        contenuBoiteDialogue.innerHTML = "Le robot subit 100 points de dégâts. Les autres subissent 75 points de dégats";
+                        vieMonstre2.innerHTML = parseInt(vieMonstre2.innerHTML) - 50;
+                        contenuBoiteDialogue.innerHTML = "Le robot subit 50 points de dégâts.";
                     }
-    
+
                     attaque2 = true;
-    
+
                     action2 = true;
 
-                    cool2[2]=2;
-    
-                    if (vieMonstre1.innerHTML <= 0) {
-                        contenuBoiteDialogue.innerHTML = "La guêpe a été tuée.";
-                        imgMonstre1.style.visibility='hidden';
-                        mortMonstre1 = true;
-                    }
+                    cool2[0]=2;
+
+                    statHero2.style.border = 'none';
+
                     if (vieMonstre2.innerHTML <= 0) {
                         contenuBoiteDialogue.innerHTML = "Le robot a été tué.";
                         imgMonstre2.style.visibility='hidden';
                         mortMonstre2 = true;
                     }
-                    if (vieMonstre3.innerHTML <= 0) {
-                        contenuBoiteDialogue.innerHTML = "L'arbre a été tué.";
-                        imgMonstre3.style.visibility='hidden';
-                        mortMonstre3 = true;
+
+                    if((mortMonstre1==true) && (mortMonstre2==true) && (mortMonstre3==true)){
+                        setTimeout(() => {
+                            scene.style.visibility = 'hidden';
+                            contenuBoiteDialogue.innerHTML = "YOU WIN";
+                            victoire = true;
+                        },1000);
                     }
                 }
 
                 imgMonstre3.onclick = function() {
 
                     if(attaque2==false){
-    
-                        vieMonstre1.innerHTML = parseInt(vieMonstre1.innerHTML) - 75;
-                        vieMonstre2.innerHTML = parseInt(vieMonstre2.innerHTML) - 75;
-                        vieMonstre3.innerHTML = parseInt(vieMonstre3.innerHTML) - 100;
 
-                        contenuBoiteDialogue.innerHTML = "L'arbre subit 100 points de dégâts. Les autres subissent 75 points de dégats";
+                        vieMonstre3.innerHTML = parseInt(vieMonstre3.innerHTML) - 50;
+                        contenuBoiteDialogue.innerHTML = "L'arbre subit 50 points de dégâts.";
                     }
-    
+
                     attaque2 = true;
-    
+
                     action2 = true;
 
-                    cool2[2]=2;
-    
-                    if (vieMonstre1.innerHTML <= 0) {
-                        contenuBoiteDialogue.innerHTML = "La guêpe a été tuée.";
-                        imgMonstre1.style.visibility='hidden';
-                        mortMonstre1 = true;
-                    }
-                    if (vieMonstre2.innerHTML <= 0) {
-                        contenuBoiteDialogue.innerHTML = "Le robot a été tué.";
-                        imgMonstre2.style.visibility='hidden';
-                        mortMonstre2 = true;
-                    }
+                    cool2[0]=2;
+
+                    statHero2.style.border = 'none';
+
                     if (vieMonstre3.innerHTML <= 0) {
                         contenuBoiteDialogue.innerHTML = "L'arbre a été tué.";
                         imgMonstre3.style.visibility='hidden';
                         mortMonstre3 = true;
                     }
+
+                    if((mortMonstre1==true) && (mortMonstre2==true) && (mortMonstre3==true)){
+                        setTimeout(() => {
+                            scene.style.visibility = 'hidden';
+                            contenuBoiteDialogue.innerHTML = "YOU WIN";
+                            victoire = true;
+                        },1000);
+                    }
                 }
 
-                manaHero2.innerHTML = parseInt(manaHero2.innerHTML) - 10;
                 CompetenceHeros.style.visibility='hidden';
             }
 
             else
-                if(manaHero2.innerHTML<10){
-                    contenuBoiteDialogue.innerHTML = "Esposito n'a pas assez de mana pour utiliser sa capacité spéciale";  
+                if(cool2[0]>0){
+                    contenuBoiteDialogue.innerHTML = "Esposito doit attendre le prochain tour pour attaquer.";
+                }
+        }
+
+        boutonDefense.onclick = function(){
+
+            if(cool2[1]==0){
+
+                contenuBoiteDialogue.innerHTML = "Vous avez choisi de vous défendre, Esposito va se protéger lors de la prochaine riposte";
+                def2 = 2;
+                action2 = true;
+                CompetenceHeros.style.visibility='hidden';
+                cool2[1]=2;
+                statHero2.style.border = 'none';
+            }
+
+            else
+                if(cool2[1]>0){
+                    contenuBoiteDialogue.innerHTML = "Esposito doit attendre le prochain tour pour se défendre.";
+                }
+        }
+
+        boutonSpecial.onclick = function(){
+
+            if(cool2[2]==0){
+
+
+
+                if(manaHero2.innerHTML >= 10){
+
+                    contenuBoiteDialogue.innerHTML = "Esposito utilse sa capacité spéciale. Quel monstre doit prendre l'attaque principale ?";
+
+                    imgMonstre1.onclick = function() {
+
+                        if(attaque2==false){
+        
+                            vieMonstre1.innerHTML = parseInt(vieMonstre1.innerHTML) - 100;
+                            vieMonstre2.innerHTML = parseInt(vieMonstre2.innerHTML) - 75;
+                            vieMonstre3.innerHTML = parseInt(vieMonstre3.innerHTML) - 75;
+
+                            contenuBoiteDialogue.innerHTML = "La guêpe subit 100 points de dégâts. Les autres subissent 75 points de dégats";
+                        }
+        
+                        attaque2 = true;
+        
+                        action2 = true;
+
+                        cool2[2]=2;
+
+                        statHero2.style.border = 'none';
+        
+                        if (vieMonstre1.innerHTML <= 0) {
+                            contenuBoiteDialogue.innerHTML = "La guêpe a été tuée.";
+                            imgMonstre1.style.visibility='hidden';
+                            mortMonstre1 = true;
+                        }
+                        if (vieMonstre2.innerHTML <= 0) {
+                            contenuBoiteDialogue.innerHTML = "Le robot a été tué.";
+                            imgMonstre2.style.visibility='hidden';
+                            mortMonstre2 = true;
+                        }
+                        if (vieMonstre3.innerHTML <= 0) {
+                            contenuBoiteDialogue.innerHTML = "L'arbre a été tué.";
+                            imgMonstre3.style.visibility='hidden';
+                            mortMonstre3 = true;
+                        }
+
+                        if((mortMonstre1==true) && (mortMonstre2==true) && (mortMonstre3==true)){
+                            setTimeout(() => {
+                                scene.style.visibility = 'hidden';
+                                contenuBoiteDialogue.innerHTML = "YOU WIN";
+                                victoire = true;
+                            },1000);
+                        }
+                    }
+
+                    imgMonstre2.onclick = function() {
+
+                        if(attaque2==false){
+        
+                            vieMonstre1.innerHTML = parseInt(vieMonstre1.innerHTML) - 75;
+                            vieMonstre2.innerHTML = parseInt(vieMonstre2.innerHTML) - 100;
+                            vieMonstre3.innerHTML = parseInt(vieMonstre3.innerHTML) - 75;
+
+                            contenuBoiteDialogue.innerHTML = "Le robot subit 100 points de dégâts. Les autres subissent 75 points de dégats";
+                        }
+        
+                        attaque2 = true;
+        
+                        action2 = true;
+
+                        cool2[2]=2;
+
+                        statHero2.style.border = 'none';
+        
+                        if (vieMonstre1.innerHTML <= 0) {
+                            contenuBoiteDialogue.innerHTML = "La guêpe a été tuée.";
+                            imgMonstre1.style.visibility='hidden';
+                            mortMonstre1 = true;
+                        }
+                        if (vieMonstre2.innerHTML <= 0) {
+                            contenuBoiteDialogue.innerHTML = "Le robot a été tué.";
+                            imgMonstre2.style.visibility='hidden';
+                            mortMonstre2 = true;
+                        }
+                        if (vieMonstre3.innerHTML <= 0) {
+                            contenuBoiteDialogue.innerHTML = "L'arbre a été tué.";
+                            imgMonstre3.style.visibility='hidden';
+                            mortMonstre3 = true;
+                        }
+
+                        if((mortMonstre1==true) && (mortMonstre2==true) && (mortMonstre3==true)){
+                            setTimeout(() => {
+                                scene.style.visibility = 'hidden';
+                                contenuBoiteDialogue.innerHTML = "YOU WIN";
+                                victoire = true;
+                            },1000);
+                        }
+                    }
+
+                    imgMonstre3.onclick = function() {
+
+                        if(attaque2==false){
+        
+                            vieMonstre1.innerHTML = parseInt(vieMonstre1.innerHTML) - 75;
+                            vieMonstre2.innerHTML = parseInt(vieMonstre2.innerHTML) - 75;
+                            vieMonstre3.innerHTML = parseInt(vieMonstre3.innerHTML) - 100;
+
+                            contenuBoiteDialogue.innerHTML = "L'arbre subit 100 points de dégâts. Les autres subissent 75 points de dégats";
+                        }
+        
+                        attaque2 = true;
+        
+                        action2 = true;
+
+                        cool2[2]=2;
+
+                        statHero2.style.border = 'none';
+        
+                        if (vieMonstre1.innerHTML <= 0) {
+                            contenuBoiteDialogue.innerHTML = "La guêpe a été tuée.";
+                            imgMonstre1.style.visibility='hidden';
+                            mortMonstre1 = true;
+                        }
+                        if (vieMonstre2.innerHTML <= 0) {
+                            contenuBoiteDialogue.innerHTML = "Le robot a été tué.";
+                            imgMonstre2.style.visibility='hidden';
+                            mortMonstre2 = true;
+                        }
+                        if (vieMonstre3.innerHTML <= 0) {
+                            contenuBoiteDialogue.innerHTML = "L'arbre a été tué.";
+                            imgMonstre3.style.visibility='hidden';
+                            mortMonstre3 = true;
+                        }
+
+                        if((mortMonstre1==true) && (mortMonstre2==true) && (mortMonstre3==true)){
+                            setTimeout(() => {
+                                scene.style.visibility = 'hidden';
+                                contenuBoiteDialogue.innerHTML = "YOU WIN";
+                                victoire = true;
+                            },1000);
+                        }
+                    }
+
+                    manaHero2.innerHTML = parseInt(manaHero2.innerHTML) - 10;
+                    CompetenceHeros.style.visibility='hidden';
+                }
+
+                else
+                    if(manaHero2.innerHTML<10){
+                        contenuBoiteDialogue.innerHTML = "Esposito n'a pas assez de mana pour utiliser sa capacité spéciale";  
+                    }
+            }
+
+            else
+                if(cool2[2]>0){
+                    contenuBoiteDialogue.innerHTML = "Esposito doit attendre le prochain tour pour utiliser sa capacité spéciale.";
                 }
 
         }
 
 
     }
+
 }
 
 //sélection de l'héroïne "Beckett"
 image3.onclick = function() {
+
+    statHero1.style.border = 'none';
+    statHero2.style.border = 'none';
+    statHero4.style.border = 'none';
+
+    statHero3.style.border = 'solid blue';
 
     if(action3==false){
 
@@ -548,166 +693,259 @@ image3.onclick = function() {
 
         boutonAttaque.onclick = function() {
 
-            contenuBoiteDialogue.innerHTML = "Vous avez choisi d'attaquer. Qui voulez-vous attaquer ?";
-            
-            imgMonstre1.onclick = function() {
+            if(cool3[0]==0){
 
-                if (attaque3 == false){
-
-                    vieMonstre1.innerHTML = parseInt(vieMonstre1.innerHTML) - 50;
-                    contenuBoiteDialogue.innerHTML = "La guêpe subit 50 points de dégâts.";
-                }
-                attaque3 = true;
-
-                action3 = true;
-
-                cool3[0]=2;
-
-                if (vieMonstre1.innerHTML <= 0) {
-                    contenuBoiteDialogue.innerHTML = "La guêpe a été tuée.";
-                    imgMonstre1.style.visibility='hidden';
-                    mortMonstre1 = true;
-                }
-            }
-            
-            imgMonstre2.onclick = function() {
-
-                if(attaque3 == false){
-
-                    vieMonstre2.innerHTML = parseInt(vieMonstre2.innerHTML) - 50;
-                    contenuBoiteDialogue.innerHTML = "Le robot subit 50 points de dégâts.";
-                }
-                attaque3 = true;
-
-                action3 = true;
-
-                cool3[0]=2;
-
-                if (vieMonstre2.innerHTML <= 0) {
-                    contenuBoiteDialogue.innerHTML = "Le robot a été tué.";
-                    imgMonstre2.style.visibility='hidden';
-                    mortMonstre2 = true;
-                }
-            }
-
-            imgMonstre3.onclick = function() {
-
-                if(attaque3 == false){
-
-                vieMonstre3.innerHTML = parseInt(vieMonstre3.innerHTML) - 50;
-                contenuBoiteDialogue.innerHTML = "L'arbre subit 50 points de dégâts.";
-                }
-
-                attaque3 = true;
-
-                action3 = true;
-
-                cool3[0]=2;
-
-                if (vieMonstre3.innerHTML <= 0) {
-                    contenuBoiteDialogue.innerHTML = "L'arbre a été tué.";
-                    imgMonstre3.style.visibility='hidden';
-                    mortMonstre3 = true;
-                }
-            }
-
-            CompetenceHeros.style.visibility='hidden';
-        }
-
-        boutonDefense.onclick = function(){
-
-            contenuBoiteDialogue.innerHTML = "Vous avez choisi de vous défendre, Beckett va se protéger lors de la prochaine riposte";
-            def3 = 2;
-            action3 = true;
-            cool3[1]= 2;
-            CompetenceHeros.style.visibility='hidden';
-        }
-
-        boutonSpecial.onclick = function(){
-
-            if(manaHero3.innerHTML >= 10){
-
-                contenuBoiteDialogue.innerHTML = "Beckett utilse sa capacité spéciale. Quel monstre voulez vous attaquer par surprise ?";
-                multiplicateur = Math.floor(Math.random() * 4)+2;
-                degatBeckett = multiplicateur * 50;
-
+                contenuBoiteDialogue.innerHTML = "Vous avez choisi d'attaquer. Qui voulez-vous attaquer ?";
+                    
                 imgMonstre1.onclick = function() {
 
                     if (attaque3 == false){
-    
-                        vieMonstre1.innerHTML = parseInt(vieMonstre1.innerHTML) - degatBeckett;
-                        contenuBoiteDialogue.innerHTML = "La guêpe subit " + degatBeckett + " points de dégâts.";
+
+                        vieMonstre1.innerHTML = parseInt(vieMonstre1.innerHTML) - 50;
+                        contenuBoiteDialogue.innerHTML = "La guêpe subit 50 points de dégâts.";
                     }
                     attaque3 = true;
-    
+
                     action3 = true;
 
-                    cool3[2]= 2;
-    
+                    cool3[0]=2;
+
+                    statHero3.style.border = 'none';
+
                     if (vieMonstre1.innerHTML <= 0) {
-                        contenuBoiteDialogue.innerHTML = "La guêpe a été tuée.";
-                        imgMonstre1.style.visibility='hidden';
-                        mortMonstre1 = true;
+                            contenuBoiteDialogue.innerHTML = "La guêpe a été tuée.";
+                            imgMonstre1.style.visibility='hidden';
+                            mortMonstre1 = true;
+                    }
+
+                    if((mortMonstre1==true) && (mortMonstre2==true) && (mortMonstre3==true)){
+                        setTimeout(() => {
+                            scene.style.visibility = 'hidden';
+                            contenuBoiteDialogue.innerHTML = "YOU WIN";
+                            victoire = true;
+                        },1000);
                     }
                 }
-
+                
                 imgMonstre2.onclick = function() {
 
                     if(attaque3 == false){
-    
-                        vieMonstre2.innerHTML = parseInt(vieMonstre2.innerHTML) - degatBeckett;
-                        contenuBoiteDialogue.innerHTML = "Le robot subit " + degatBeckett + " points de dégâts.";
+
+                        vieMonstre2.innerHTML = parseInt(vieMonstre2.innerHTML) - 50;
+                        contenuBoiteDialogue.innerHTML = "Le robot subit 50 points de dégâts.";
                     }
                     attaque3 = true;
-    
+
                     action3 = true;
 
-                    cool3[2]= 2;
-    
+                    cool3[0]=2;
+
+                    statHero3.style.border = 'none';
+
                     if (vieMonstre2.innerHTML <= 0) {
                         contenuBoiteDialogue.innerHTML = "Le robot a été tué.";
                         imgMonstre2.style.visibility='hidden';
                         mortMonstre2 = true;
                     }
-                }
-    
-                imgMonstre3.onclick = function() {
-    
-                    if(attaque3 == false){
-    
-                    vieMonstre3.innerHTML = parseInt(vieMonstre3.innerHTML) - degatBeckett;
-                    contenuBoiteDialogue.innerHTML = "L'arbre subit " + degatBeckett + " points de dégâts.";
+
+                    if((mortMonstre1==true) && (mortMonstre2==true) && (mortMonstre3==true)){
+                        setTimeout(() => {
+                            scene.style.visibility = 'hidden';
+                            contenuBoiteDialogue.innerHTML = "YOU WIN";
+                            victoire = true;
+                        },1000);
                     }
-    
+                }
+
+                imgMonstre3.onclick = function() {
+
+                    if(attaque3 == false){
+
+                    vieMonstre3.innerHTML = parseInt(vieMonstre3.innerHTML) - 50;
+                    contenuBoiteDialogue.innerHTML = "L'arbre subit 50 points de dégâts.";
+                    }
+
                     attaque3 = true;
-    
+
                     action3 = true;
 
-                    cool3[2]= 2;
-    
+                    cool3[0]=2;
+
+                    statHero3.style.border = 'none';
+
                     if (vieMonstre3.innerHTML <= 0) {
                         contenuBoiteDialogue.innerHTML = "L'arbre a été tué.";
                         imgMonstre3.style.visibility='hidden';
                         mortMonstre3 = true;
                     }
+
+                    if((mortMonstre1==true) && (mortMonstre2==true) && (mortMonstre3==true)){
+                        setTimeout(() => {
+                            scene.style.visibility = 'hidden';
+                            contenuBoiteDialogue.innerHTML = "YOU WIN";
+                            victoire = true;
+                        },1000);
+                    }
                 }
 
-                manaHero3.innerHTML = parseInt(manaHero3.innerHTML) - 10;
                 CompetenceHeros.style.visibility='hidden';
             }
 
             else
-                if(manaHero3.innerHTML<10){
-                    contenuBoiteDialogue.innerHTML = "Beckett n'a pas assez de mana pour utiliser sa capacité spéciale";  
+                if(cool3[0]>0){
+                    contenuBoiteDialogue.innerHTML = "Beckett doit attendre le prochain tour pour attaquer."
+                }
+        }
+
+        boutonDefense.onclick = function(){
+
+            if(cool3[1]==0){
+
+                contenuBoiteDialogue.innerHTML = "Vous avez choisi de vous défendre, Beckett va se protéger lors de la prochaine riposte";
+                def3 = 2;
+                action3 = true;
+                cool3[1]= 2;
+                statHero3.style.border = 'none';
+                CompetenceHeros.style.visibility='hidden';
+            }
+
+            else
+                if(cool3[1]>0){
+                    contenuBoiteDialogue.innerHTML = "Beckett doit attendre le prochain tour pour se défendre.";
+                }
+        }
+
+        boutonSpecial.onclick = function(){
+
+            if(cool3[2]==0){
+
+
+                if(manaHero3.innerHTML >= 10){
+
+                    contenuBoiteDialogue.innerHTML = "Beckett utilse sa capacité spéciale. Quel monstre voulez vous attaquer par surprise ?";
+                    multiplicateur = Math.floor(Math.random() * 4)+2;
+                    degatBeckett = multiplicateur * 50;
+
+                    imgMonstre1.onclick = function() {
+
+                        if (attaque3 == false){
+        
+                            vieMonstre1.innerHTML = parseInt(vieMonstre1.innerHTML) - degatBeckett;
+                            contenuBoiteDialogue.innerHTML = "La guêpe subit " + degatBeckett + " points de dégâts.";
+                        }
+                        attaque3 = true;
+        
+                        action3 = true;
+
+                        cool3[2]= 2;
+
+                        statHero3.style.border = 'none';
+        
+                        if (vieMonstre1.innerHTML <= 0) {
+                            contenuBoiteDialogue.innerHTML = "La guêpe a été tuée.";
+                            imgMonstre1.style.visibility='hidden';
+                            mortMonstre1 = true;
+                        }
+
+                        if((mortMonstre1==true) && (mortMonstre2==true) && (mortMonstre3==true)){
+                            setTimeout(() => {
+                                scene.style.visibility = 'hidden';
+                                contenuBoiteDialogue.innerHTML = "YOU WIN";
+                                victoire = true;
+                            },1000);
+                        }
+                    }
+
+                    imgMonstre2.onclick = function() {
+
+                        if(attaque3 == false){
+        
+                            vieMonstre2.innerHTML = parseInt(vieMonstre2.innerHTML) - degatBeckett;
+                            contenuBoiteDialogue.innerHTML = "Le robot subit " + degatBeckett + " points de dégâts.";
+                        }
+                        attaque3 = true;
+        
+                        action3 = true;
+
+                        cool3[2]= 2;
+
+                        statHero3.style.border = 'none';
+        
+                        if (vieMonstre2.innerHTML <= 0) {
+                            contenuBoiteDialogue.innerHTML = "Le robot a été tué.";
+                            imgMonstre2.style.visibility='hidden';
+                            mortMonstre2 = true;
+                        }
+
+                        if((mortMonstre1==true) && (mortMonstre2==true) && (mortMonstre3==true)){
+                            setTimeout(() => {
+                                scene.style.visibility = 'hidden';
+                                contenuBoiteDialogue.innerHTML = "YOU WIN";
+                                victoire = true;
+                            },1000);
+                        }
+                    }
+        
+                    imgMonstre3.onclick = function() {
+        
+                        if(attaque3 == false){
+        
+                        vieMonstre3.innerHTML = parseInt(vieMonstre3.innerHTML) - degatBeckett;
+                        contenuBoiteDialogue.innerHTML = "L'arbre subit " + degatBeckett + " points de dégâts.";
+                        }
+        
+                        attaque3 = true;
+        
+                        action3 = true;
+
+                        cool3[2]= 2;
+
+                        statHero3.style.border = 'none';
+        
+                        if (vieMonstre3.innerHTML <= 0) {
+                            contenuBoiteDialogue.innerHTML = "L'arbre a été tué.";
+                            imgMonstre3.style.visibility='hidden';
+                            mortMonstre3 = true;
+                        }
+
+                        if((mortMonstre1==true) && (mortMonstre2==true) && (mortMonstre3==true)){
+                            setTimeout(() => {
+                                scene.style.visibility = 'hidden';
+                                contenuBoiteDialogue.innerHTML = "YOU WIN";
+                                victoire = true;
+                            },1000);
+                        }
+                    }
+
+                    manaHero3.innerHTML = parseInt(manaHero3.innerHTML) - 10;
+                    CompetenceHeros.style.visibility='hidden';
+                }
+
+                else
+                    if(manaHero3.innerHTML<10){
+                        contenuBoiteDialogue.innerHTML = "Beckett n'a pas assez de mana pour utiliser sa capacité spéciale.";  
+                    }
+            }
+
+            else
+                if(cool3[2]>0){
+                    contenuBoiteDialogue.innerHTML = "Beckett doit attendre le prochain tour pour utiliser sa capacité spéciale.";
                 }
 
         }
 
     }
+
 }
 
 //sélection du héros "Ryan"
 image4.onclick = function() {
+
+    statHero1.style.border = 'none';
+    statHero2.style.border = 'none';
+    statHero3.style.border = 'none';
+
+    statHero4.style.border = 'solid blue';
 
     if (action4==false){
 
@@ -734,117 +972,185 @@ image4.onclick = function() {
 
         boutonAttaque.onclick = function() {
 
-            contenuBoiteDialogue.innerHTML = "Vous avez choisi d'attaquer. Qui voulez-vous attaquer ?";
-            
-            imgMonstre1.onclick = function() {
+            if(cool4[0]==0){
 
-                if(attaque4 == false){
+                contenuBoiteDialogue.innerHTML = "Vous avez choisi d'attaquer. Qui voulez-vous attaquer ?";
+                
+                imgMonstre1.onclick = function() {
 
-                    vieMonstre1.innerHTML = parseInt(vieMonstre1.innerHTML) - 50;
-                    contenuBoiteDialogue.innerHTML = "La guêpe subit 50 points de dégâts.";
+                    if(attaque4 == false){
+
+                        vieMonstre1.innerHTML = parseInt(vieMonstre1.innerHTML) - 50;
+                        contenuBoiteDialogue.innerHTML = "La guêpe subit 50 points de dégâts.";
+                    }
+
+                    attaque4 = true;
+
+                    action4 = true;
+
+                    cool4[0]=2;
+
+                    statHero4.style.border = 'none';
+
+                    if (vieMonstre1.innerHTML <= 0) {
+                        contenuBoiteDialogue.innerHTML = "La guêpe a été tuée.";
+                        imgMonstre1.style.visibility='hidden';
+                        mortMonstre1 = true;
+                    }
+
+                    if((mortMonstre1==true) && (mortMonstre2==true) && (mortMonstre3==true)){
+                        setTimeout(() => {
+                            scene.style.visibility = 'hidden';
+                            contenuBoiteDialogue.innerHTML = "YOU WIN";
+                            victoire = true;
+                        },1000);
+                    }
+                }
+                
+                imgMonstre2.onclick = function() {
+
+                    if(attaque4 == false){
+
+                        vieMonstre2.innerHTML = parseInt(vieMonstre2.innerHTML) - 50;
+                        contenuBoiteDialogue.innerHTML = "Le robot subit 50 points de dégâts.";
+                    }
+
+                    attaque4 = true;
+
+                    action4 = true;
+
+                    cool4[0]=2;
+
+                    statHero4.style.border = 'none';
+
+                    if (vieMonstre2.innerHTML <= 0) {
+                        contenuBoiteDialogue.innerHTML = "Le robot a été tué.";
+                        imgMonstre2.style.visibility='hidden';
+                        mortMonstre2 = true;
+                    }
+
+                    if((mortMonstre1==true) && (mortMonstre2==true) && (mortMonstre3==true)){
+                        setTimeout(() => {
+                            scene.style.visibility = 'hidden';
+                            contenuBoiteDialogue.innerHTML = "YOU WIN";
+                            victoire = true;
+                        },1000);
+                    }
                 }
 
-                attaque4 = true;
+                imgMonstre3.onclick = function() {
 
-                action4 = true;
+                    if(attaque4 == false){
 
-                cool4[0]=2;
+                        vieMonstre3.innerHTML = parseInt(vieMonstre3.innerHTML) - 50;
+                        contenuBoiteDialogue.innerHTML = "L'arbre subit 50 points de dégâts.";
+                    }
 
-                if (vieMonstre1.innerHTML <= 0) {
-                    contenuBoiteDialogue.innerHTML = "La guêpe a été tuée.";
-                    imgMonstre1.style.visibility='hidden';
-                    mortMonstre1 = true;
+                    attaque4= true;
+
+                    action4 = true;
+
+                    cool4[0]=2;
+
+                    statHero4.style.border = 'none';
+
+                    if (vieMonstre3.innerHTML <= 0) {
+                        contenuBoiteDialogue.innerHTML = "L'arbre a été tué.";
+                        imgMonstre3.style.visibility='hidden';
+                        mortMonstre3 = true;
+                    }
+
+                    if((mortMonstre1==true) && (mortMonstre2==true) && (mortMonstre3==true)){
+                        setTimeout(() => {
+                            scene.style.visibility = 'hidden';
+                            contenuBoiteDialogue.innerHTML = "YOU WIN";
+                            victoire = true;
+                        },1000);
+                    }
                 }
+
+                CompetenceHeros.style.visibility='hidden';
             }
-            
-            imgMonstre2.onclick = function() {
 
-                if(attaque4 == false){
-
-                    vieMonstre2.innerHTML = parseInt(vieMonstre2.innerHTML) - 50;
-                    contenuBoiteDialogue.innerHTML = "Le robot subit 50 points de dégâts.";
+            else
+                if(cool4[0]>0){
+                    contenuBoiteDialogue.innerHTML = "Ryan doit attendre le prochain tour pour attaquer.";
                 }
-
-                attaque4 = true;
-
-                action4 = true;
-
-                cool4[0]=2;
-
-                if (vieMonstre2.innerHTML <= 0) {
-                    contenuBoiteDialogue.innerHTML = "Le robot a été tué.";
-                    imgMonstre2.style.visibility='hidden';
-                    mortMonstre2 = true;
-                }
-            }
-
-            imgMonstre3.onclick = function() {
-
-                if(attaque4 == false){
-
-                    vieMonstre3.innerHTML = parseInt(vieMonstre3.innerHTML) - 50;
-                    contenuBoiteDialogue.innerHTML = "L'arbre subit 50 points de dégâts.";
-                }
-
-                attaque4= true;
-
-                action4 = true;
-
-                cool4[0]=2;
-
-                if (vieMonstre3.innerHTML <= 0) {
-                    contenuBoiteDialogue.innerHTML = "L'arbre a été tué.";
-                    imgMonstre3.style.visibility='hidden';
-                    mortMonstre3 = true;
-                }
-            }
-
-            CompetenceHeros.style.visibility='hidden';
 
         }
 
         boutonDefense.onclick = function(){
 
-            contenuBoiteDialogue.innerHTML = "Vous avez choisi de vous défendre, Ryan va se protéger lors de la prochaine riposte";
-            def4 = 2;
-            action4 = true;
-            cool4[1]=2;
-            CompetenceHeros.style.visibility='hidden';
+            if(cool4[1]==0){
+
+                contenuBoiteDialogue.innerHTML = "Vous avez choisi de vous défendre, Ryan va se protéger lors de la prochaine riposte";
+                def4 = 2;
+                action4 = true;
+                cool4[1]=2;
+                CompetenceHeros.style.visibility='hidden';
+                statHero4.style.border = 'none';
+            }
+
+            else
+                if(cool4[1]>0){
+                    contenuBoiteDialogue.innerHTML = "Ryan doit attendre le prochain tour pour se défendre.";
+                }
 
         }
 
         boutonSpecial.onclick = function(){
 
-            if(manaHero4.innerHTML >= 10){
+            if(cool4[2]==0){
 
-                contenuBoiteDialogue.innerHTML = "Ryan utilse sa capacité spéciale. La vie de tout le monde remonte.";
+                if(manaHero4.innerHTML >= 10){
 
-                vieHero1.innerHTML = parseInt(vieHero1.innerHTML) +10;
-                vieHero2.innerHTML = parseInt(vieHero2.innerHTML) +10;
-                vieHero3.innerHTML = parseInt(vieHero3.innerHTML) +10;
-                vieHero4.innerHTML = parseInt(vieHero4.innerHTML) +10;
+                    contenuBoiteDialogue.innerHTML = "Ryan utilse sa capacité spéciale. La vie de tout le monde remonte.";
 
-                action4 = true;
-                cool4[2]=2;
-                manaHero4.innerHTML = parseInt(manaHero4.innerHTML) - 10;
-                CompetenceHeros.style.visibility='hidden';
+                    if((vieHero1.innerHTML > 0) && (vieHero1.innerHTML<=90)){
+                        vieHero1.innerHTML = parseInt(vieHero1.innerHTML) +10;
+                    }
+
+                    if((vieHero2.innerHTML > 0) && (vieHero2.innerHTML<=90)){
+                        vieHero2.innerHTML = parseInt(vieHero2.innerHTML) +10;
+                    }
+
+                    if((vieHero3.innerHTML > 0) && (vieHero3.innerHTML<=90)){
+                        vieHero3.innerHTML = parseInt(vieHero3.innerHTML) +10;
+                    }
+
+                    if((vieHero4.innerHTML > 0) && (vieHero4.innerHTML<=90)){
+                        vieHero4.innerHTML = parseInt(vieHero4.innerHTML) +10;
+                    }
+
+                    action4 = true;
+                    cool4[2]=2;
+                    manaHero4.innerHTML = parseInt(manaHero4.innerHTML) - 10;
+                    CompetenceHeros.style.visibility='hidden';
+                    statHero4.style.border = 'none';
+                }
+
+                else
+                    if(manaHero4.innerHTML<10){
+                        contenuBoiteDialogue.innerHTML = "Ryan n'a pas assez de mana pour utiliser sa capacité spéciale.";  
+                    }
             }
 
             else
-                if(manaHero4.innerHTML<10){
-                    contenuBoiteDialogue.innerHTML = "Ryan n'a pas assez de mana pour utiliser sa capacité spéciale";  
+                if(cool4[2]>0){
+                    contenuBoiteDialogue.innerHTML = "Ryan doit attendre le prochain tour pour utiliser sa capacité spéciale.";
                 }
 
         }
 
     }
+
 }
 
 
 
 //début de la riposte
 scene.onclick = function(){
-    if ((action1== true) && (action2 == true) && (action3 == true) && (action4 == true)) {
+    if ((action1== true) && (action2 == true) && (action3 == true) && (action4 == true) && (victoire==false) && (defaite==false)) {
         setTimeout(() => {
             contenuBoiteDialogue.innerHTML = "Les monstres vont attaquer !";
             setTimeout(() => {
@@ -861,7 +1167,9 @@ scene.onclick = function(){
                         if (vieHero1.innerHTML <= 0) {
                             contenuBoiteDialogue.innerHTML = "Castle a été tué.";
                             statHero1.style.visibility='hidden';
-                            mortHeros1 = true
+                            mortHeros1 = true;
+                            action1=true;
+                            attaque1=true;
                         }
                     }
                     if ((cible == 2) && (mortHeros2 == false)){
@@ -873,7 +1181,9 @@ scene.onclick = function(){
                         if (vieHero2.innerHTML <= 0) {
                             contenuBoiteDialogue.innerHTML = "Esposito a été tué.";
                             statHero2.style.visibility='hidden';
-                            mortHeros2 = true
+                            mortHeros2 = true;
+                            action2=true;
+                            attaque2=true;
                         }
                     }
                     if ((cible == 3) && (mortHeros3 == false)){
@@ -885,7 +1195,9 @@ scene.onclick = function(){
                         if (vieHero3.innerHTML <= 0) {
                             contenuBoiteDialogue.innerHTML = "Beckett a été tué.";
                             statHero3.style.visibility='hidden';
-                            mortHeros3 = true
+                            mortHeros3 = true;
+                            action3=true;
+                            attaque3=true;
                         }
                     }
                     if ((cible == 4) && (mortHeros4 == false)){
@@ -897,7 +1209,9 @@ scene.onclick = function(){
                         if (vieHero4.innerHTML <= 0) {
                             contenuBoiteDialogue.innerHTML = "Ryan a été tué.";
                             statHero4.style.visibility='hidden';
-                            mortHeros4 = true
+                            mortHeros4 = true;
+                            action4=true;
+                            attaque4=true;
                         }
                     }
                 }
@@ -918,7 +1232,9 @@ scene.onclick = function(){
                         if (vieHero1.innerHTML <= 0) {
                             contenuBoiteDialogue.innerHTML = "Castle a été tué.";
                             statHero1.style.visibility='hidden';
-                            mortHeros1 = true
+                            mortHeros1 = true;
+                            action1=true;
+                            attaque1=true;
                         }
                     }
                     if ((cible == 2) && (mortHeros2 == false)){
@@ -930,7 +1246,9 @@ scene.onclick = function(){
                         if (vieHero2.innerHTML <= 0) {
                             contenuBoiteDialogue.innerHTML = "Esposito a été tué.";
                             statHero2.style.visibility='hidden';
-                            mortHeros2 = true
+                            mortHeros2 = true;
+                            action2=true;
+                            attaque2=true;
                         }
                     }
                     if ((cible == 3) && (mortHeros3 == false)){
@@ -942,7 +1260,9 @@ scene.onclick = function(){
                         if (vieHero3.innerHTML <= 0) {
                             contenuBoiteDialogue.innerHTML = "Beckett a été tué.";
                             statHero3.style.visibility='hidden';
-                            mortHeros3 = true
+                            mortHeros3 = true;
+                            action3=true;
+                            attaque3=true;
                         }
                     }
                     if ((cible == 4) && (mortHeros4 == false)){
@@ -954,7 +1274,9 @@ scene.onclick = function(){
                         if (vieHero4.innerHTML <= 0) {
                             contenuBoiteDialogue.innerHTML = "Ryan a été tué.";
                             statHero4.style.visibility='hidden';
-                            mortHeros4 = true
+                            mortHeros4 = true;
+                            action4=true;
+                            attaque4=true;
                         }
                     }
                 }
@@ -974,7 +1296,9 @@ scene.onclick = function(){
                         if (vieHero1.innerHTML <= 0) {
                             contenuBoiteDialogue.innerHTML = "Castle a été tué.";
                             statHero1.style.visibility='hidden';
-                            mortHeros1 = true
+                            mortHeros1 = true;
+                            action1=true;
+                            attaque1=true;
                         }
                     }
                     if ((cible == 2) && (mortHeros2 == false)){
@@ -986,7 +1310,9 @@ scene.onclick = function(){
                         if (vieHero2.innerHTML <= 0) {
                             contenuBoiteDialogue.innerHTML = "Esposito a été tué.";
                             statHero2.style.visibility='hidden';
-                            mortHeros2 = true
+                            mortHeros2 = true;
+                            action2=true;
+                            attaque2=true;
                         }
                     }
                     if ((cible == 3) && (mortHeros3 == false)){
@@ -998,7 +1324,9 @@ scene.onclick = function(){
                         if (vieHero3.innerHTML <= 0) {
                             contenuBoiteDialogue.innerHTML = "Beckett a été tué.";
                             statHero3.style.visibility='hidden';
-                            mortHeros3 = true
+                            mortHeros3 = true;
+                            action3= true;
+                            attaque3= true;
                         }
                     }
                     if ((cible == 4) && (mortHeros4 == false)){
@@ -1010,23 +1338,37 @@ scene.onclick = function(){
                         if (vieHero4.innerHTML <= 0) {
                             contenuBoiteDialogue.innerHTML = "Ryan a été tué.";
                             statHero4.style.visibility='hidden';
-                            mortHeros4 = true
+                            mortHeros4 = true;
+                            action4= true;
+                            attaque4=true;
                         }
                     }
                 }
+                // réinitialistion des statistiques
+
+                if(mortHeros1==false){
+                    action1 = false;
+                    attaque1 = false;
+                }
+
+                if(mortHeros2==false){
+                    action2 = false;
+                    attaque2 = false;
+                }
+
+                if(mortHeros3==false){
+                    action3 = false;
+                    attaque3 = false;
+                }
+
+                if(mortHeros4==false){
+                    action4 = false;
+                    attaque4 = false;
+                }
 
             },7000);
-            // réinitialistion des statistiques
-            action1 = false
-            action2 = false
-            action3 = false
-            action4 = false
-            
-            attaque1 = false
-            attaque2 = false
-            attaque3 = false
-            attaque4 = false
 
+            // réinitialistion des statistiques
 
             // cooldown Héros 1
             if(cool1[0]>0){
@@ -1082,13 +1424,21 @@ scene.onclick = function(){
 
 
             setTimeout(() => {
-            
+
+
                 contenuBoiteDialogue.innerHTML = "C'est à vous de jouer. Choisissez un héros";
 
                 def1 = 1
                 def2 = 1
                 def3 = 1
                 def4 = 1
+
+                if((mortHeros1==true) && (mortHeros2==true) && (mortHeros3==true) && (mortHeros4==true)){
+
+                    scene.style.visibility = 'hidden';
+                    contenuBoiteDialogue.innerHTML = "GAME OVER";
+                    defaite = true;
+                }
 
             },9000);
 
@@ -1098,15 +1448,7 @@ scene.onclick = function(){
     }
 }
 
-
-
-
-
-
-if (vieHero1.innerHTML <= 0) {
-    vieHero1.innerHTML = 0;
-    contenuBoiteDialogue.innerHTML = "Le Héros 1 as été tué.";
-}
+// vérifier le passage de la souris pour afficher la bulle du monstre
 
 // survol du monstre 1
 document.getElementById("imgMonstre1").onmouseover = function()
