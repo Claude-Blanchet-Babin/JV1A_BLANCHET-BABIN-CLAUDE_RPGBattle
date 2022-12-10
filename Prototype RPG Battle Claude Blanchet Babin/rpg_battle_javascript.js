@@ -104,6 +104,9 @@ var degat1 = 0
 var degat2 = 0
 var degat2 = 0
 
+var degatBeckett = 0
+var multiplicateur = 0
+
 //début du combat
 
 //cacher les éléments que l'on souhaite
@@ -310,21 +313,113 @@ image2.onclick = function() {
 
         boutonSpecial.onclick = function(){
 
-            if(manaHero1.innerHTML >= 10){
+            if(manaHero2.innerHTML >= 10){
 
-                contenuBoiteDialogue.innerHTML = "Castle utilse sa capacité spéciale. La défense de tout le monde est augmentée.";
-                def1 = 10
-                def2 = 10
-                def3 = 10
-                def4 = 10
-                action1 = true
-                manaHero1.innerHTML = parseInt(manaHero1.innerHTML) - 10;
+                contenuBoiteDialogue.innerHTML = "Esposito utilse sa capacité spéciale. Quel monstre doit prendre l'attaque principale ?";
+
+                imgMonstre1.onclick = function() {
+
+                    if(attaque2==false){
+    
+                        vieMonstre1.innerHTML = parseInt(vieMonstre1.innerHTML) - 100;
+                        vieMonstre2.innerHTML = parseInt(vieMonstre2.innerHTML) - 75;
+                        vieMonstre3.innerHTML = parseInt(vieMonstre3.innerHTML) - 75;
+
+                        contenuBoiteDialogue.innerHTML = "La guêpe subit 100 points de dégâts. Les autres subissent 75 points de dégats";
+                    }
+    
+                    attaque2 = true
+    
+                    action2 = true
+    
+                    if (vieMonstre1.innerHTML <= 0) {
+                        contenuBoiteDialogue.innerHTML = "La guêpe a été tuée.";
+                        imgMonstre1.style.visibility='hidden';
+                        mortMonstre1 = true;
+                    }
+                    if (vieMonstre2.innerHTML <= 0) {
+                        contenuBoiteDialogue.innerHTML = "Le robot a été tué.";
+                        imgMonstre2.style.visibility='hidden';
+                        mortMonstre2 = true;
+                    }
+                    if (vieMonstre3.innerHTML <= 0) {
+                        contenuBoiteDialogue.innerHTML = "L'arbre a été tué.";
+                        imgMonstre3.style.visibility='hidden';
+                        mortMonstre3 = true;
+                    }
+                }
+
+                imgMonstre2.onclick = function() {
+
+                    if(attaque2==false){
+    
+                        vieMonstre1.innerHTML = parseInt(vieMonstre1.innerHTML) - 75;
+                        vieMonstre2.innerHTML = parseInt(vieMonstre2.innerHTML) - 100;
+                        vieMonstre3.innerHTML = parseInt(vieMonstre3.innerHTML) - 75;
+
+                        contenuBoiteDialogue.innerHTML = "Le robot subit 100 points de dégâts. Les autres subissent 75 points de dégats";
+                    }
+    
+                    attaque2 = true
+    
+                    action2 = true
+    
+                    if (vieMonstre1.innerHTML <= 0) {
+                        contenuBoiteDialogue.innerHTML = "La guêpe a été tuée.";
+                        imgMonstre1.style.visibility='hidden';
+                        mortMonstre1 = true;
+                    }
+                    if (vieMonstre2.innerHTML <= 0) {
+                        contenuBoiteDialogue.innerHTML = "Le robot a été tué.";
+                        imgMonstre2.style.visibility='hidden';
+                        mortMonstre2 = true;
+                    }
+                    if (vieMonstre3.innerHTML <= 0) {
+                        contenuBoiteDialogue.innerHTML = "L'arbre a été tué.";
+                        imgMonstre3.style.visibility='hidden';
+                        mortMonstre3 = true;
+                    }
+                }
+
+                imgMonstre3.onclick = function() {
+
+                    if(attaque2==false){
+    
+                        vieMonstre1.innerHTML = parseInt(vieMonstre1.innerHTML) - 75;
+                        vieMonstre2.innerHTML = parseInt(vieMonstre2.innerHTML) - 75;
+                        vieMonstre3.innerHTML = parseInt(vieMonstre3.innerHTML) - 100;
+
+                        contenuBoiteDialogue.innerHTML = "L'arbre subit 100 points de dégâts. Les autres subissent 75 points de dégats";
+                    }
+    
+                    attaque2 = true
+    
+                    action2 = true
+    
+                    if (vieMonstre1.innerHTML <= 0) {
+                        contenuBoiteDialogue.innerHTML = "La guêpe a été tuée.";
+                        imgMonstre1.style.visibility='hidden';
+                        mortMonstre1 = true;
+                    }
+                    if (vieMonstre2.innerHTML <= 0) {
+                        contenuBoiteDialogue.innerHTML = "Le robot a été tué.";
+                        imgMonstre2.style.visibility='hidden';
+                        mortMonstre2 = true;
+                    }
+                    if (vieMonstre3.innerHTML <= 0) {
+                        contenuBoiteDialogue.innerHTML = "L'arbre a été tué.";
+                        imgMonstre3.style.visibility='hidden';
+                        mortMonstre3 = true;
+                    }
+                }
+
+                manaHero2.innerHTML = parseInt(manaHero2.innerHTML) - 10;
                 CompetenceHeros.style.visibility='hidden';
             }
 
             else
-                if(manaHero1.innerHTML<10){
-                    contenuBoiteDialogue.innerHTML = "Castle n'a pas assez de mana pour utiliser sa capacité spéciale";  
+                if(manaHero2.innerHTML<10){
+                    contenuBoiteDialogue.innerHTML = "Esposito n'a pas assez de mana pour utiliser sa capacité spéciale";  
                 }
 
         }
@@ -413,21 +508,74 @@ image3.onclick = function() {
 
         boutonSpecial.onclick = function(){
 
-            if(manaHero1.innerHTML >= 10){
+            if(manaHero3.innerHTML >= 10){
 
-                contenuBoiteDialogue.innerHTML = "Castle utilse sa capacité spéciale. La défense de tout le monde est augmentée.";
-                def1 = 10
-                def2 = 10
-                def3 = 10
-                def4 = 10
-                action1 = true
-                manaHero1.innerHTML = parseInt(manaHero1.innerHTML) - 10;
+                contenuBoiteDialogue.innerHTML = "Beckett utilse sa capacité spéciale. Quel monstre voulez vous attaquer par surprise ?";
+                multiplicateur = Math.floor(Math.random() * 4)+2;
+                degatBeckett = multiplicateur * 50;
+
+                imgMonstre1.onclick = function() {
+
+                    if (attaque3 == false){
+    
+                        vieMonstre1.innerHTML = parseInt(vieMonstre1.innerHTML) - degatBeckett;
+                        contenuBoiteDialogue.innerHTML = "La guêpe subit " + degatBeckett + " points de dégâts.";
+                    }
+                    attaque3 = true
+    
+                    action3 = true
+    
+                    if (vieMonstre1.innerHTML <= 0) {
+                        contenuBoiteDialogue.innerHTML = "La guêpe a été tuée.";
+                        imgMonstre1.style.visibility='hidden';
+                        mortMonstre1 = true;
+                    }
+                }
+
+                imgMonstre2.onclick = function() {
+
+                    if(attaque3 == false){
+    
+                        vieMonstre2.innerHTML = parseInt(vieMonstre2.innerHTML) - degatBeckett;
+                        contenuBoiteDialogue.innerHTML = "Le robot subit " + degatBeckett + " points de dégâts.";
+                    }
+                    attaque3 = true
+    
+                    action3 = true
+    
+                    if (vieMonstre2.innerHTML <= 0) {
+                        contenuBoiteDialogue.innerHTML = "Le robot a été tué.";
+                        imgMonstre2.style.visibility='hidden';
+                        mortMonstre2 = true;
+                    }
+                }
+    
+                imgMonstre3.onclick = function() {
+    
+                    if(attaque3 == false){
+    
+                    vieMonstre3.innerHTML = parseInt(vieMonstre3.innerHTML) - degatBeckett;
+                    contenuBoiteDialogue.innerHTML = "L'arbre subit " + degatBeckett + " points de dégâts.";
+                    }
+    
+                    attaque3 = true
+    
+                    action3 = true
+    
+                    if (vieMonstre3.innerHTML <= 0) {
+                        contenuBoiteDialogue.innerHTML = "L'arbre a été tué.";
+                        imgMonstre3.style.visibility='hidden';
+                        mortMonstre3 = true;
+                    }
+                }
+
+                manaHero3.innerHTML = parseInt(manaHero3.innerHTML) - 10;
                 CompetenceHeros.style.visibility='hidden';
             }
 
             else
-                if(manaHero1.innerHTML<10){
-                    contenuBoiteDialogue.innerHTML = "Castle n'a pas assez de mana pour utiliser sa capacité spéciale";  
+                if(manaHero3.innerHTML<10){
+                    contenuBoiteDialogue.innerHTML = "Beckett n'a pas assez de mana pour utiliser sa capacité spéciale";  
                 }
 
         }
@@ -553,7 +701,7 @@ scene.onclick = function(){
             setTimeout(() => {
 
                 if (mortMonstre1 == false){
-                    cible = Math.floor(Math.random() * 3)+1;
+                    cible = Math.floor(Math.random() * 4)+1;
 
                     if ((cible == 1) && (mortHeros1==false)){
                         degat1 = 10 / def1
@@ -610,7 +758,7 @@ scene.onclick = function(){
             setTimeout(() => {
 
                 if (mortMonstre2 == false){
-                    cible = Math.floor(Math.random() * 3)+1;
+                    cible = Math.floor(Math.random() * 4)+1;
 
                     if ((cible == 1) && (mortHeros1==false)){
                         degat2 = 10 / def1
@@ -667,7 +815,7 @@ scene.onclick = function(){
             setTimeout(() => {
 
                 if (mortMonstre3 == false){
-                    cible = Math.floor(Math.random() * 3)+1;
+                    cible = Math.floor(Math.random() * 4)+1;
                     if ((cible == 1) && (mortHeros1==false)){
                         degat3 = 10 / def1
                         vieHero1.innerHTML = parseInt(vieHero1.innerHTML) - degat3;
